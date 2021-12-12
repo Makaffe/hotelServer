@@ -16,13 +16,40 @@ public class User {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long Id;
-    @ApiModelProperty(value = "账号",required = false)
+    @ApiModelProperty(value = "账号",required = true)
     private String username;
-    @ApiModelProperty(value = "密码",required = false)
+    @ApiModelProperty(value = "密码",required = true)
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orderList = new ArrayList<>();
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    @ApiModelProperty(value = "身份证号码",required = true)
+    private String identity ;
+    @ApiModelProperty(value = "姓名",required = true)
+    private String name;
+    @ApiModelProperty(value = "手机号",required = true)
+    private String phone;
 
     public Long getId() {
         return Id;
@@ -48,11 +75,5 @@ public class User {
         this.password = password;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
 }

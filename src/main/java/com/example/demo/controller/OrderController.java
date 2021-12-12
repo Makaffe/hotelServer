@@ -3,15 +3,19 @@ package com.example.demo.controller;
 import com.example.demo.po.Order;
 import com.example.demo.po.User;
 import com.example.demo.service.OrderService;
+import com.example.demo.vo.OrderQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 
 @Api("订单实体类")
 @RestController
@@ -21,10 +25,29 @@ public class OrderController {
     private OrderService orderService;
 
     @ApiOperation("新增订单")
-    @PostMapping("/add")
-    public Order add(@ApiParam("订单") Order order){
-        orderService.add(order);
-        return order;
+    @PostMapping("/startOrder")
+    public String add(@ApiParam("订单") Order order) throws ParseException {
+
+        return orderService.add(order);
     }
+    @ApiOperation("结束订单")
+    @PostMapping("/endOrder/{id}")
+    public String end(@PathVariable("id") Long Id) throws ParseException {
+
+        return orderService.end(Id);
+    }
+
+    @ApiOperation("查询所有订单")
+    @GetMapping("/findAll")
+    public List findAll(){
+        return orderService.findAll();
+    }
+    @ApiOperation("根据条件查询所有订单")
+    @PostMapping("/findByQuery/search")
+    public List search(@ApiParam("查询条件") OrderQuery order) {
+
+        return orderService.listOrder(order);
+    }
+
 
 }

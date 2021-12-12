@@ -1,7 +1,12 @@
 package com.example.demo.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,26 +20,46 @@ public class Order {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private String identity ;
 
-    private String name;
-
-    private String phone;
 
     private String totalPrice;
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
+
+    @ApiModelProperty(value = "开始时间",required = false,example = "Sat Dec 11 10:24:56 CST 2021")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private String startDate;
+
+    @ApiModelProperty(value = "结束时间",required = false,example = "Sat Dec 11 10:24:56 CST 2021")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private String endDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyTime;
-    @ManyToOne
-    private Room room ;
+    @ApiModelProperty(value = "订单状态(1为进行中，0为已结束)")
+    private boolean status;
+    @ApiModelProperty(value = "房间ID",required = true)
+    private Long room_Id;
 
-    @ManyToOne
-    private User user;
+    @ApiModelProperty(value = "用户ID",required = true)
+    private Long user_Id;
+
+
+
+    public Long getRoom_Id() {
+        return room_Id;
+    }
+
+    public void setRoom_Id(Long room_Id) {
+        this.room_Id = room_Id;
+    }
+
+    public Long getUser_Id() {
+        return user_Id;
+    }
+
+    public void setUser_Id(Long user_Id) {
+        this.user_Id = user_Id;
+    }
 
 
     public void setId(Long id) {
@@ -44,45 +69,6 @@ public class Order {
         return id;
     }
 
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -100,27 +86,35 @@ public class Order {
         this.modifyTime = modifyTime;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

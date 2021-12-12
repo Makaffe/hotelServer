@@ -21,10 +21,10 @@ public class Room {
     @ApiModelProperty(value = "房间名",required = false)
     private String roomName;
 //    @NotNull(message = "所属大厅不能为空")
-    @ApiModelProperty(value = "所属大厅名",required = false)
+    @ApiModelProperty(value = "所属大厅名",required = true)
     private String hallName;
 //    @NotNull(message = "房间状态不能为空")
-    @ApiModelProperty(value = "房间可住状态",required = false,example = "true")
+    @ApiModelProperty(value = "房间可住状态",required = true,example = "true")
     private boolean status;
 
     @ApiModelProperty(value = "父节点Id",required = false,example="1")
@@ -34,14 +34,11 @@ public class Room {
     private String image;
 
 //    @NotBlank(message = "描述不能为空")
-    @ApiModelProperty(value = "房间描述",required = false)
+    @ApiModelProperty(value = "房间描述",required = true)
     private String description;
 
     @ApiModelProperty(value = "房间价格",required = false)
     private String price;
-
-    @OneToMany(mappedBy = "room")
-    private List<Order> orderList = new ArrayList<>();
 
     @Transient
     private List<Room> children =new ArrayList<Room>();
@@ -119,11 +116,4 @@ public class Room {
         this.children = children;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
 }
