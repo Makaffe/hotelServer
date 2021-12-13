@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void add(User user) {
-
+        user.setBookingTime(0);
         userDao.save(user);
     }
 

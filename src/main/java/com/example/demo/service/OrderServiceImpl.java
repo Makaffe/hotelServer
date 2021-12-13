@@ -47,14 +47,23 @@ public class OrderServiceImpl implements OrderService{
         }
         Room r = roomDao.getById(order.getRoom_Id());
         User u = userDao.getById(order.getUser_Id());
+        //判断房间是否可用
         if(r.isStatus()) {
             if (r != null && r.getParent_Id() != null && u != null) {
+                //设置订单状态为进行中
                 order.setStatus(true);
                 int price = Integer.parseInt(r.getPrice());
+                //自动计算总价
                 order.setTotalPrice((daysBetween(order.getStartDate(),order.getEndDate())*price)+"");
                 orderDao.save(order);
+                //设置房间状态为不可用
                 roomDao.updateStatus(false, r.getId());
-
+                //设置用户预定次数+1
+                userDao.updateBookingTime(u.getId());
+                if(orderDao.isExist(u.getId(),r.getId())==null) {
+                    //推荐表不存在相应的数据才添加进数据库中
+                    orderDao.addRecommend(u.getId(), r.getId());
+                }
                 return "新建订单成功";
             } else {
                 return "请检查房间和用户ID";

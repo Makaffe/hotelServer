@@ -43,6 +43,7 @@ public class Room {
     @Transient
     private List<Room> children =new ArrayList<Room>();
 
+
     public Long getId() {
         return Id;
     }
@@ -116,4 +117,7 @@ public class Room {
         this.children = children;
     }
 
+    /**
+     * 下方为多对多的关系
+     */
 }

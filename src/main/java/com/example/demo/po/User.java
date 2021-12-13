@@ -21,35 +21,16 @@ public class User {
     @ApiModelProperty(value = "密码",required = true)
     private String password;
 
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
     @ApiModelProperty(value = "身份证号码",required = true)
     private String identity ;
     @ApiModelProperty(value = "姓名",required = true)
     private String name;
     @ApiModelProperty(value = "手机号",required = true)
     private String phone;
+
+    @ApiModelProperty(value="预定次数",required = false)
+    private Integer bookingTime;
+
 
     public Long getId() {
         return Id;
@@ -76,4 +57,39 @@ public class User {
     }
 
 
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(Integer bookingTime) {
+        this.bookingTime = bookingTime;
+    }
+
+    /**
+     * 下方为多对多的关系映射
+     */
 }
