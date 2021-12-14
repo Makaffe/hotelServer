@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.Dao.RecommendDao;
 import com.example.demo.po.Recommend;
+import com.example.demo.po.Room;
+import com.example.demo.service.RecommendService;
 import com.example.demo.vo.OrderQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,12 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("订单实体类")
+@Api(value = "推荐实体类",tags = {"收藏管理"})
 @RestController
 @RequestMapping("/recommend")
 public class RecommendController {
     @Autowired
     private RecommendDao recommendDao;
+
+    @Autowired
+    private RecommendService recommendService;
 
     @ApiOperation("查看当前用户的推荐房间" )
     @GetMapping("/findByUser/{id}")
@@ -30,6 +35,13 @@ public class RecommendController {
         Recommend r = recommendDao.findById(Id).get();
         recommendDao.delete(r);
         return "删除推荐成功";
+    }
+
+    @ApiOperation("用户收藏房间")
+    @PostMapping("/add")
+    public String add(@ApiParam("推荐") Recommend recommend){
+
+        return recommendService.add(recommend);
     }
 
 }

@@ -52,7 +52,13 @@ public class OrderServiceImpl implements OrderService{
             if (r != null && r.getParent_Id() != null && u != null) {
                 //设置订单状态为进行中
                 order.setStatus(true);
-                int price = Integer.parseInt(r.getPrice());
+                //计算用户预定次数
+                double price;
+                if(u.getBookingTime()<3){
+                    price = Integer.parseInt(r.getPrice())*0.8;
+                }else{
+                    price = Integer.parseInt(r.getPrice());
+                }
                 //自动计算总价
                 order.setTotalPrice((daysBetween(order.getStartDate(),order.getEndDate())*price)+"");
                 orderDao.save(order);

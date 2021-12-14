@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 
-@Api("订单实体类")
+@Api(value = "订单实体类",tags = {"订单管理"})
 @RestController
 @RequestMapping("/order")
 public class OrderController {

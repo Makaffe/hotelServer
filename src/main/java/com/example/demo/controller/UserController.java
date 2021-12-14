@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Api("用户实体类")
+@Api(value="用户实体类",tags = {"用户管理"})
 @RestController
 @RequestMapping("/user")
 public class UserController {

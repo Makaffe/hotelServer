@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("房间实体类")
+@Api(value="房间实体类",tags = {"房间管理"})
 @RestController
 @RequestMapping("/room")
 public class RoomController {
