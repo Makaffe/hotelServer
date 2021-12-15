@@ -24,11 +24,11 @@ public class Order {
 
     private String totalPrice;
 
-    @ApiModelProperty(value = "开始时间",required = false,example = "Sat Dec 11 10:24:56 CST 2021")
+    @ApiModelProperty(value = "开始时间",required = false,example = "2021-01-01")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String startDate;
 
-    @ApiModelProperty(value = "结束时间",required = false,example = "Sat Dec 11 10:24:56 CST 2021")
+    @ApiModelProperty(value = "结束时间",required = false,example = "2021-01-01")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String endDate;
     @Temporal(TemporalType.TIMESTAMP)

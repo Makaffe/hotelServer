@@ -47,9 +47,10 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public List<Comment> findByQuery(CommentQuery commentQuery) {
-        if (commentQuery.getOrder_Id() != null) {
-            return assemble(commentDao.findByOrder_Id(commentQuery.getOrder_Id()));
-        } else if (commentQuery.getUser_Id() != null) {
+//        if (commentQuery.getOrder_Id() != null) {
+//            return assemble(commentDao.findByOrder_Id(commentQuery.getOrder_Id()));
+//        } else
+        if (commentQuery.getUser_Id() != null) {
             return assemble(commentDao.findByUser_Id(commentQuery.getUser_Id()));
         } else if (commentQuery.getRoom_Id() != null) {
             return assemble(commentDao.findByRoom_Id(commentQuery.getRoom_Id()));
