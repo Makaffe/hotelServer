@@ -26,7 +26,8 @@ public class OrderController {
 
     @ApiOperation("新增订单")
     @PostMapping("/startOrder")
-    public String add(@ApiParam("订单") Order order) throws ParseException {
+
+    public String add(@RequestBody Order order) throws ParseException {
 
         return orderService.add(order);
     }
