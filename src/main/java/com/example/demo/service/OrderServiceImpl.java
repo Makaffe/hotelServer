@@ -123,7 +123,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public List findAll() {
-        return orderDao.findAll();
+        return orderDao.findAllByDesc();
     }
 
     @Override
@@ -137,8 +137,9 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Room findById(Long Id) {
-        return null;
+    public Order findById(Long Id) {
+        Order o = orderDao.getById(Id);
+        return o;
     }
 
 

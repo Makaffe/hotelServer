@@ -23,5 +23,5 @@ public interface OrderService {
 
     String update(Long Id, Order order);
 
-    Room findById(Long Id);
+    Order findById(Long Id);
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 @Api(value = "推荐实体类",tags = {"收藏管理"})
 @RestController
+@CrossOrigin
 @RequestMapping("/recommend")
 public class RecommendController {
     @Autowired

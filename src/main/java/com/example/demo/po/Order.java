@@ -1,6 +1,7 @@
 package com.example.demo.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name="t_order")
+//以下注释    在实体类中 发现有字段为null，在转化成json的时候，fasterxml.jackson将对象转换为json报错
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class Order {
     @Id
     @GeneratedValue(strategy = IDENTITY)

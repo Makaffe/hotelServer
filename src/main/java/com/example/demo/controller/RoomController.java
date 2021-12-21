@@ -15,6 +15,7 @@ import java.util.List;
 
 @Api(value="房间实体类",tags = {"房间管理"})
 @RestController
+@CrossOrigin
 @RequestMapping("/room")
 public class RoomController {
     @Autowired
@@ -22,7 +23,7 @@ public class RoomController {
 
     @ApiOperation("新增房间")
     @PostMapping("/add")
-    public Room add(@ApiParam("房间") Room room){
+    public Room add(@RequestBody Room room){
         roomService.add(room);
         return room;
     }
@@ -35,8 +36,11 @@ public class RoomController {
 
     @ApiOperation("删除某一个房间，删除楼层的话，需要保证关联的房间已经删除")
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long Id){
-        return roomService.delete(Id);
+    public Room delete(@PathVariable("id") Long Id){
+
+        Room r = roomService.findById(Id);
+        roomService.delete(Id);
+        return r;
     }
 
     @ApiOperation("更新房间或大厅")

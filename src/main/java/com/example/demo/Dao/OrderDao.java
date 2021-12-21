@@ -50,5 +50,8 @@ public interface OrderDao extends JpaRepository<Order, Long>, JpaSpecificationEx
     @Query("select o from Order o where o.status=?1")
     List<Order> findByStatus(Boolean status);
 
+    @Query(value = "select o from Order o order by o.status desc")
+    List<Order> findAllByDesc();
+
 
 }
