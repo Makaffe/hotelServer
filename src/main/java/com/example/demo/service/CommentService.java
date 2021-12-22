@@ -9,4 +9,6 @@ public interface CommentService {
     String add(Comment comment);
 
     List<Comment> findByQuery(CommentQuery commentQuery);
+
+    List<Comment> findAll();
 }

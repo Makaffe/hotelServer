@@ -59,7 +59,10 @@ public class CommentServiceImpl implements CommentService{
         }
     }
 
-
+    @Override
+    public List<Comment> findAll() {
+        return this.assemble(commentDao.findAll());
+    }
 
 
     public List<Comment> assemble(List<Comment> allList){

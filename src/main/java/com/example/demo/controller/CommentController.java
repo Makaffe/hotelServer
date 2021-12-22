@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,13 +23,22 @@ public class CommentController {
 
     @ApiOperation("根据条件查询所有订单")
     @PostMapping("/search")
-    public List<Comment> search(@ApiParam("查询条件") CommentQuery commentQuery) {
+    public List<Comment> search(@RequestBody CommentQuery commentQuery) {
         return commentService.findByQuery(commentQuery);
     }
 
     @ApiOperation("新增评论")
     @PostMapping("/add")
-    public String add(@ApiParam Comment comment){
-        return commentService.add(comment);
+    public Comment add(@RequestBody Comment comment){
+
+        commentService.add(comment);
+        return comment;
+    }
+
+
+    @ApiOperation("查询所有评论")
+    @PostMapping("/searchAll")
+    public List<Comment> findAll(){
+        return commentService.findAll();
     }
 }
