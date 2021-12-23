@@ -31,6 +31,10 @@ public class User {
     @ApiModelProperty(value="预定次数",required = false)
     private Integer bookingTime;
 
+    private String token;
+
+    private String userType;
+
 
     public Long getId() {
         return Id;
@@ -87,6 +91,22 @@ public class User {
 
     public void setBookingTime(Integer bookingTime) {
         this.bookingTime = bookingTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     /**

@@ -9,8 +9,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.NumberUtils;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -20,6 +23,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void add(User user) {
+        if(user.getUserType()==null){
+            user.setUserType("User");
+            user.setToken(String.valueOf(new Date().getTime()));
+        }
         user.setBookingTime(0);
         userDao.save(user);
     }
@@ -45,6 +52,13 @@ public class UserServiceImpl implements UserService{
         userDao.save(u);
        return "更新成功";
     }
+
+
+//    private String getNewToken(Long userId){
+//        String timeStr = new Date().toString();
+//        String token = timeStr + userId;
+//        return token;
+//    }
 
 
 

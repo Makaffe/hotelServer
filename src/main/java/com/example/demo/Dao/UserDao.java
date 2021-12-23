@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 public interface UserDao extends JpaRepository<User, Long> {
-    @Query("select s from User s where s.username = ?1 and s.password = ?2")
-    User findByUserNameAndPwd(String userName,String pwd);
+    @Query("select s from User s where s.username = ?1 and s.password = ?2 and s.userType = ?3")
+    User findByUserNameAndPwd(String userName,String pwd,String userType);
 
     @Modifying
     @Query(value = "update User u set u.bookingTime = u.bookingTime+1 where u.Id = ?1")

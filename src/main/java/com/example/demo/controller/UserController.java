@@ -29,7 +29,7 @@ public class UserController {
 
     @ApiOperation("注册用户")
     @PostMapping("/add")
-    public User add(@ApiParam("用户") User user){
+    public User add(@RequestBody User user){
         userService.add(user);
         return user;
     }
@@ -51,19 +51,19 @@ public class UserController {
         return  userService.update(Id,user);
     }
     @ApiOperation("登录验证")
-    @GetMapping("/login")
-    public String login(@ApiParam("用户") User user, HttpSession session){
+    @PostMapping("/login")
+    public User login(@RequestBody User user, HttpSession session){
         String userName = user.getUsername();
         String pwd = user.getPassword();
-        user = userDao.findByUserNameAndPwd(userName,pwd);
+        String userType = user.getUserType();
+        user = userDao.findByUserNameAndPwd(userName,pwd,userType);
         String str = "";
         if(user!=null){
             session.setAttribute("userLogin",user);
-            str = "验证成功，进入首页";
+            return user;
         }else{
-            str = "验证失败，返回登录页面";
+            return null;
         }
-        return str;
     }
 
 
