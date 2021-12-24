@@ -55,4 +55,10 @@ public class RoomController {
     public Room findById(@PathVariable("id") Long Id){
         return roomService.findById(Id);
     }
+
+    @ApiOperation("不生成树形结构的房间查询")
+    @GetMapping("/findAllByNotTree")
+    public List<Room> findAllByNotTree(){
+        return roomService.findAllByNotTree();
+    }
 }

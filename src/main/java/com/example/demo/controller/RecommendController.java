@@ -45,4 +45,11 @@ public class RecommendController {
         return recommendService.add(recommend);
     }
 
+    @ApiOperation("查询所有收藏")
+    @GetMapping("/findRecommend")
+    public List findAll(){
+        return recommendDao.findRecommend();
+    }
+
+
 }

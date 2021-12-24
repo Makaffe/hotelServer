@@ -105,4 +105,8 @@ public class RoomServiceImpl implements RoomService {
             return null;
         }
     }
+
+    public List<Room> findAllByNotTree(){
+        return roomDao.findAll();
+    }
 }

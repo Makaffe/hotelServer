@@ -17,4 +17,6 @@ public interface RecommendDao extends JpaRepository<Recommend, Long> {
     @Query("select r from Recommend r where r.user_Id = ?1 and r.room_Id = ?2")
     Recommend findByUserAndRoom(Long user_Id,Long room_Id);
 
+    @Query(value = "select c.id,u.id 用户id,r.id 房间id,r.description,r.hall_name,r.image,r.price,r.room_name,r.status from t_recommend c inner join t_room r on c.room_id = r.id inner join t_user u on c.user_id = u.id GROUP BY c.id ;" ,nativeQuery = true)
+    List findRecommend();
 }

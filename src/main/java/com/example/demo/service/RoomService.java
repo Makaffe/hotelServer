@@ -16,4 +16,6 @@ public interface RoomService {
 
     Room findById(Long Id);
 
+    List<Room> findAllByNotTree();
+
 }
