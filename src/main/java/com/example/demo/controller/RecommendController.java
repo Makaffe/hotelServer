@@ -32,17 +32,18 @@ public class RecommendController {
 
     @ApiOperation("用户删除自身的推荐信息")
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long Id){
+    public Recommend delete(@PathVariable("id") Long Id){
         Recommend r = recommendDao.findById(Id).get();
         recommendDao.delete(r);
-        return "删除推荐成功";
+        return r;
     }
 
     @ApiOperation("用户收藏房间")
     @PostMapping("/add")
-    public String add(@ApiParam("推荐") Recommend recommend){
-
-        return recommendService.add(recommend);
+    public Recommend add(@RequestBody Recommend recommend){
+        Recommend recommend1 = recommend;
+        recommendService.add(recommend);
+        return recommend1;
     }
 
     @ApiOperation("查询所有收藏")
