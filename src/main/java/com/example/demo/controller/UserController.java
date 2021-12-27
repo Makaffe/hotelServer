@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.Dao.UserDao;
 import com.example.demo.po.User;
 import com.example.demo.service.UserService;
+import com.example.demo.vo.OrderQuery;
+import com.example.demo.vo.RoleQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -65,6 +67,13 @@ public class UserController {
         }else{
             return null;
         }
+    }
+
+    @ApiOperation("根据条件查询用户")
+    @PostMapping("/findByQuery")
+    public List search(@RequestBody RoleQuery query) {
+
+        return userService.findByQuery(query);
     }
 
 

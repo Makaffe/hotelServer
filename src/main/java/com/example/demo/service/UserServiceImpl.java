@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.Dao.UserDao;
 import com.example.demo.po.User;
+import com.example.demo.vo.RoleQuery;
 import javassist.NotFoundException;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -52,6 +53,11 @@ public class UserServiceImpl implements UserService{
         BeanUtils.copyProperties(user,u);
         userDao.save(u);
        return user;
+    }
+
+    @Override
+    public List<User> findByQuery(RoleQuery query){
+        return userDao.findByQuery(query.getName(),query.getPhone(),query.getRole());
     }
 
 

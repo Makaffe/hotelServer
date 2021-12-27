@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.po.User;
+import com.example.demo.vo.RoleQuery;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,5 @@ public interface UserService {
 
     User update(Long Id,User user);
 
-
+    List findByQuery(RoleQuery query);
 }
