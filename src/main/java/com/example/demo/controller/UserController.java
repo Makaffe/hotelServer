@@ -40,13 +40,14 @@ public class UserController {
     }
     @ApiOperation("删除用户")
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long Id){
+    public User delete(@PathVariable("id") Long Id){
+        User user = userDao.findById(Id).get();
         userService.delete(Id);
-        return "deleteSuccess";
+        return user;
     }
     @ApiOperation("更新用户")
-    @PutMapping("/update/{id}")
-    public String update(@PathVariable("id") Long Id,@ApiParam("用户") User user){
+    @PostMapping("/update/{id}")
+    public User update(@PathVariable("id") Long Id,@RequestBody User user){
 
         return  userService.update(Id,user);
     }

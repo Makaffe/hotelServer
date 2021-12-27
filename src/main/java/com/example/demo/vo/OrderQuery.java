@@ -2,7 +2,13 @@ package com.example.demo.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Entity;
+
 public class OrderQuery {
+    public OrderQuery() {
+    }
+
+
     @ApiModelProperty(value = "用户Id",required = false,dataType = "Long")
     private Long user_Id;
     @ApiModelProperty(value = "房间Id",required = false,dataType = "Long")

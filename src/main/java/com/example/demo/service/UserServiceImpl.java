@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserService{
     public void add(User user) {
         if(user.getUserType()==null){
             user.setUserType("User");
-            user.setToken(String.valueOf(new Date().getTime()));
+
         }
+        user.setToken(String.valueOf(new Date().getTime()));
         user.setBookingTime(0);
         userDao.save(user);
     }
@@ -43,14 +44,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String update(Long Id, User user){
+    public User update(Long Id, User user){
        User u = userDao.findById(Id).get();
        if(u==null){
-           return "不存在该类型";
+           return null;
        }
         BeanUtils.copyProperties(user,u);
         userDao.save(u);
-       return "更新成功";
+       return user;
     }
 
 

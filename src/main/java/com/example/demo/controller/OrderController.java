@@ -49,9 +49,11 @@ public class OrderController {
     public List findAll(){
         return orderService.findAll();
     }
+
+
     @ApiOperation("根据条件查询所有订单")
-    @PostMapping("/findByQuery/search")
-    public List search(@ApiParam("查询条件") OrderQuery order) {
+    @PostMapping("/findByQuery")
+    public List search(@RequestBody OrderQuery order) {
 
         return orderService.listOrder(order);
     }
