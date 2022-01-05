@@ -1,9 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.task;
 
 import com.example.demo.po.Order;
+import com.example.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +13,12 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class ApplicationRunnerImpl implements ApplicationRunner {
+public class timer {
     @Autowired
     private OrderService orderService;
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        System.out.println("通过实现ApplicationRunner接口，在spring boot项目启动后打印参数");
+
+    @Scheduled(cron = "0 0 0/1 * * ? ")
+    public void scheduled() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
@@ -48,4 +47,5 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         }
         return f;
     }
+
 }
