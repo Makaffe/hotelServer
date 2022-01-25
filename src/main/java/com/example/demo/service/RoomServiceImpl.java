@@ -106,6 +106,7 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
+    @Override
     public List<Room> findAllByNotTree(){
         return roomDao.findAll();
     }
