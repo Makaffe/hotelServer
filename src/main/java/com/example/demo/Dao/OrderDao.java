@@ -53,5 +53,7 @@ public interface OrderDao extends JpaRepository<Order, Long>, JpaSpecificationEx
     @Query(value = "select o from Order o order by o.status desc")
     List<Order> findAllByDesc();
 
-
+    @Modifying
+    @Query(value = "update Order o set o.commentStatus = ?1 where o.id = ?2")
+    void updateCommentStatus(boolean status,Long id);
 }

@@ -61,6 +61,7 @@ public class OrderServiceImpl implements OrderService{
                 }
                 //自动计算总价
                 order.setTotalPrice((daysBetween(order.getStartDate(),order.getEndDate())*price)+"");
+                order.setCommentStatus(true);
                 orderDao.save(order);
                 //设置房间状态为不可用
                 roomDao.updateStatus(false, r.getId());

@@ -23,7 +23,7 @@ public class Order {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-
+    private boolean commentStatus;
 
     private String totalPrice;
 
@@ -119,5 +119,13 @@ public class Order {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isCommentStatus() {
+        return commentStatus;
+    }
+
+    public void setCommentStatus(boolean commentStatus) {
+        this.commentStatus = commentStatus;
     }
 }

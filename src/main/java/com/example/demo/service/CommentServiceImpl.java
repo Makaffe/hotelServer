@@ -38,6 +38,7 @@ public class CommentServiceImpl implements CommentService{
         if(o!=null&&!o.isStatus()){
             comment.setUser_Id(o.getUser_Id());
             comment.setRoom_Id(o.getRoom_Id());
+            orderDao.updateCommentStatus(false,o.getId());
             commentDao.save(comment);
             return "评论成功";
         }else{
