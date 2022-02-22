@@ -24,8 +24,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
         Date date = new Date();
 
         List<Order> orderlist = orderService.findAll();
+//        查阅所有的订单
         for(Order o : orderlist ){
-            if(compareDate(o.getEndDate(), dateFormat.format(date))){
+            if(compareDate(o.getEndDate(), dateFormat.format(date)) && o.isStatus()){
                 this.orderService.end(o.getId());
             }
         }

@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService{
             int price = Integer.parseInt(r.getPrice());
             if(this.daysBetween(o.getEndDate(),endDate)>0){
                 String totalPrice = (daysBetween(o.getStartDate(),o.getEndDate())*price)+"";
-                orderDao.endOrder(false,o.getEndDate(),totalPrice,new Date(),Id);
+                orderDao.endOrder(false,o.getEndDate(),totalPrice,o.getModifyTime(),Id);
             }else {
                 String totalPrice = (daysBetween(o.getStartDate(), endDate) * price) + "";
                 orderDao.endOrder(false, endDate, totalPrice, new Date(), Id);
