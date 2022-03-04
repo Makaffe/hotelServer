@@ -53,8 +53,8 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public String delete(Long Id) {
-        if(roomDao.getById(Id).getParent_Id()!=null){
-            roomDao.delete(roomDao.getById(Id));
+        if(roomDao.findById(Id).get().getParent_Id()!=null){
+            roomDao.delete(roomDao.findById(Id).get());
             return "删除成功";
         }else{
             List<Room> allList = roomDao.findAll();
@@ -65,7 +65,7 @@ public class RoomServiceImpl implements RoomService {
                     return "该楼层含有其他房间，无法删除";
                 }
             }
-            roomDao.delete(roomDao.getById(Id));
+            roomDao.delete(roomDao.findById(Id).get());
             return "删除成功";
 
         }

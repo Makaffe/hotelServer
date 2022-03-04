@@ -46,6 +46,12 @@ public class Order {
     @ApiModelProperty(value = "用户ID",required = true)
     private Long user_Id;
 
+    @ApiModelProperty(value = "同居住客姓名，姓名和身份证使用逗号隔开", required = false)
+    private String temporaryName;
+
+    @ApiModelProperty(value = "同居住客身份证，姓名和身份证使用逗号隔开", required = false)
+    private String temporaryID;
+
 
 
     public Long getRoom_Id() {
@@ -127,5 +133,21 @@ public class Order {
 
     public void setCommentStatus(boolean commentStatus) {
         this.commentStatus = commentStatus;
+    }
+
+    public String getTemporaryName() {
+        return temporaryName;
+    }
+
+    public void setTemporaryName(String temporaryName) {
+        this.temporaryName = temporaryName;
+    }
+
+    public String getTemporaryID() {
+        return temporaryID;
+    }
+
+    public void setTemporaryID(String temporaryID) {
+        this.temporaryID = temporaryID;
     }
 }

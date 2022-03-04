@@ -45,8 +45,8 @@ public class OrderServiceImpl implements OrderService{
             order.setModifyTime(new Date());
 
         }
-        Room r = roomDao.getById(order.getRoom_Id());
-        User u = userDao.getById(order.getUser_Id());
+        Room r = roomDao.findById(order.getRoom_Id()).get();
+        User u = userDao.findById(order.getUser_Id()).get();
         //判断房间是否可用
         if(r.isStatus()) {
             if (r != null && r.getParent_Id() != null && u != null) {
@@ -82,9 +82,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public String end(Long Id) throws ParseException {
-        Order o = orderDao.getById(Id);
+        Order o = orderDao.findById(Id).get();
         if(o!=null||!o.isStatus()){
-            Room r = roomDao.getById(o.getRoom_Id());
+            Room r = roomDao.findById(o.getRoom_Id()).get();
             Date date = new Date();
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String endDate = sdf.format(date);
@@ -144,7 +144,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order findById(Long Id) {
-        Order o = orderDao.getById(Id);
+        Order o = orderDao.findById(Id).get();
         return o;
     }
 

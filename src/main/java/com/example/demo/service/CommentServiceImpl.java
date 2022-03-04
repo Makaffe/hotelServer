@@ -51,9 +51,9 @@ public class CommentServiceImpl implements CommentService{
 //        if (commentQuery.getOrder_Id() != null) {
 //            return assemble(commentDao.findByOrder_Id(commentQuery.getOrder_Id()));
 //        } else
-        if (commentQuery.getUser_Id() != null) {
+        if (commentQuery.getUser_Id() != null && commentQuery.getUser_Id()!=0) {
             return assemble(commentDao.findByUser_Id(commentQuery.getUser_Id()));
-        } else if (commentQuery.getRoom_Id() != null) {
+        } else if (commentQuery.getRoom_Id() != null && commentQuery.getRoom_Id()!=0) {
             return assemble(commentDao.findByRoom_Id(commentQuery.getRoom_Id()));
         } else {
             return assemble(commentDao.findAll());

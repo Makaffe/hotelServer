@@ -18,13 +18,15 @@ public class timer {
     private OrderService orderService;
 
     @Scheduled(cron = "0 0 0/1 * * ? ")
+//    0/2 * * * * ?
+//    @Scheduled(cron = "0/2 * * * * ? ")
     public void scheduled() throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
         List<Order> orderlist = orderService.findAll();
         for(Order o : orderlist ){
-            if(compareDate(o.getEndDate(), dateFormat.format(date))){
+            if(compareDate(o.getEndDate(), dateFormat.format(date)) && o.isStatus()){
                 this.orderService.end(o.getId());
             }
         }
