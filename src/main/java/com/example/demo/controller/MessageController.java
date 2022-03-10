@@ -5,6 +5,7 @@ import com.example.demo.po.Order;
 import com.example.demo.service.MessageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class MessageController {
   @ApiOperation("查询所有消息")
   @GetMapping("/findAll")
   public List findAll(){
-    return messageService.findAll();
+    return messageService.findAll("");
   }
 
   @ApiOperation("新增消息")
@@ -33,11 +34,30 @@ public class MessageController {
     return message;
   }
   @ApiOperation("确认收到消息")
-  @PostMapping("/confirm")
+  @PostMapping("/confirm/{id}")
 
-  public Message confirm(@RequestBody Message message) {
-    messageService.confirm(message);
-    return message;
+  public Message confirm(@PathVariable("id") Long Id) {
+
+    return messageService.confirm(Id);
+  }
+
+  @ApiOperation("客户删除消息")
+  @PostMapping("/delFlag/{id}")
+
+  public Message delFlag(@PathVariable("id") Long Id) {
+    return messageService.delFlag(Id);
+  }
+
+  @ApiOperation("删除消息")
+  @PostMapping("/del/{id}")
+  public Message del(@PathVariable("id") Long Id) {
+    return messageService.del(Id);
+  }
+
+  @ApiOperation("查询状态消息")
+  @GetMapping("/findAllByStatus")
+  public List findAllByStatus(String status){
+    return messageService.findAll(status);
   }
 
 }

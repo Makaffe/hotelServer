@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.Dao.MessageDao;
 import com.example.demo.po.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,42 +19,50 @@ import java.util.concurrent.TimeUnit;
 @Transactional
 @Service
 public class MessageServiceImpl implements MessageService {
-  @Autowired
-  private RedisTemplate redisTemplate;
-  String key = "MessageList_";
+    @Autowired
+    private RedisTemplate redisTemplate;
 
-  @Override
-  public List<Message> findAll() {
-    ValueOperations<String,List<Message>> operations = redisTemplate.opsForValue();
-    List<Message> messageList = new ArrayList<>();
-    messageList = (List<Message>) operations.get(key);
-    return messageList;
-  }
+    @Autowired
+    private MessageDao messageDao;
 
-  @Override
-  public Message add(Message message) {
-    ValueOperations<String,List<Message>> operations = redisTemplate.opsForValue();
-    List<Message> messageList = new ArrayList<>();
-    messageList.add(message);
-    operations.set(key,(List<Message>) messageList,5, TimeUnit.DAYS);
-    System.out.println("存入redis");
-    return message;
-  }
-
-  @Override
-  public Message confirm(Message message) {
-    ValueOperations<String,List<Message>> operations = redisTemplate.opsForValue();
-    List<Message> messageList = new ArrayList<>();
-
-    boolean hasKey = redisTemplate.hasKey(key);
-    if(hasKey){
-      messageList =  (List<Message>) operations.get(key);
-      messageList.remove(message);
-      redisTemplate.delete(hasKey);
-      operations.set(key,(List<Message>) messageList,5, TimeUnit.DAYS);
+    @Override
+    public List<Message> findAll(String status) {
+        if(status != null && status!=""){
+            return messageDao.findByStatus(status);
+        }else{
+            return messageDao.findAll();
+        }
     }
 
+    @Override
+    public Message add(Message message) {
+        message.setStatus("Waiting");
+        message.setDelFlag(false);
+        this.messageDao.save(message);
+        return message;
 
-    return message;
-  }
+    }
+
+    @Override
+    public Message confirm(Long id) {
+        Message message = messageDao.findById(id).get();
+        message.setStatus("Finish");
+        return message;
+    }
+
+    @Override
+    public Message delFlag(Long id) {
+        Message message = messageDao.findById(id).get();
+        message.setDelFlag(true);
+        return message;
+    }
+
+    @Override
+    public Message del(Long id) {
+        Message message = messageDao.findById(id).get();
+        messageDao.delete(message);
+        return message;
+
+
+    }
 }
