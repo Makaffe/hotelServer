@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface UserDao extends JpaRepository<User, Long> {
@@ -20,4 +21,9 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     @Query(value = "select * from `t_user` where name like concat('%',?1,'%') and phone like concat('%',?2,'%') and user_type like concat('%',?3,'%')",nativeQuery = true)
     List<User> findByQuery(String name,String phone,String userType);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update User u set u.del_flag = '1' where u.Id = ?1")
+    void delUser(Long id);
 }

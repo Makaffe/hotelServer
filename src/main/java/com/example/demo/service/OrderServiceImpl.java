@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService{
                 order.setStatus(true);
                 //计算用户预定次数
                 double price;
-                if(u.getBookingTime()<3){
+                if(u.getBookingTime()>=5){
                     price = Integer.parseInt(r.getPrice())*0.8;
                 }else{
                     price = Integer.parseInt(r.getPrice());
@@ -85,11 +85,16 @@ public class OrderServiceImpl implements OrderService{
         Order o = orderDao.findById(Id).get();
         if(o!=null||!o.isStatus()){
             Room r = roomDao.findById(o.getRoom_Id()).get();
+            User u = userDao.findById(o.getUser_Id()).get();
             Date date = new Date();
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String endDate = sdf.format(date);
-            int price = Integer.parseInt(r.getPrice());
+            double price = Integer.parseInt(r.getPrice());
+            if(u.getBookingTime()>=5){
+                price = price*0.8;
+            }
             if(this.daysBetween(o.getEndDate(),endDate)>0){
+
                 String totalPrice = (daysBetween(o.getStartDate(),o.getEndDate())*price)+"";
                 orderDao.endOrder(false,o.getEndDate(),totalPrice,o.getModifyTime(),Id);
             }else {

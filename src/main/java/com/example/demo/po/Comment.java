@@ -1,6 +1,7 @@
 package com.example.demo.po;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Data
 @Table(name="t_comment")
 public class Comment {
     @Id

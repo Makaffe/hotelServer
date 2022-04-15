@@ -31,10 +31,20 @@ public class User {
     @ApiModelProperty(value="预定次数",required = false)
     private Integer bookingTime;
 
+    @ApiModelProperty(value="删除字段",required = false)
+    private String del_flag;
+
     private String token;
 
     private String userType;
 
+    public String getDel_flag() {
+        return del_flag;
+    }
+
+    public void setDel_flag(String del_flag) {
+        this.del_flag = del_flag;
+    }
 
     public Long getId() {
         return Id;

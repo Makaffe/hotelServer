@@ -30,18 +30,21 @@ public class UserServiceImpl implements UserService{
         }
         user.setToken(String.valueOf(new Date().getTime()));
         user.setBookingTime(0);
+        user.setDel_flag("0");
         userDao.save(user);
     }
 
     @Override
     public List findAll(){
+        List<User> list = userDao.findAll();
 
-       return userDao.findAll();
+       return list;
     }
 
     @Override
     public void delete(Long Id) {
-        userDao.delete(userDao.findById(Id).get());
+
+        userDao.delUser(Id);
     }
 
     @Override

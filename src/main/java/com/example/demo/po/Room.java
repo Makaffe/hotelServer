@@ -40,6 +40,17 @@ public class Room {
     @ApiModelProperty(value = "房间价格",required = false)
     private String price;
 
+    @ApiModelProperty(value = "删除字段", required = false)
+    private String del_flag;
+
+    public String getDel_flag() {
+        return del_flag;
+    }
+
+    public void setDel_flag(String del_flag) {
+        this.del_flag = del_flag;
+    }
+
     @Transient
     private List<Room> children =new ArrayList<Room>();
 

@@ -41,9 +41,10 @@ public class UserController {
         return userService.findAll();
     }
     @ApiOperation("删除用户")
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public User delete(@PathVariable("id") Long Id){
         User user = userDao.findById(Id).get();
+
         userService.delete(Id);
         return user;
     }
